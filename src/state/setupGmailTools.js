@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 
 /**
- * Store:
- *  * basic user information
- *  * all token information
+ * a function that sets up state to hold information from the gmail auth flow
  *
- * Provide:
- *  * secureFetch: function with bearer token included
+ * * secureFetch passes in some default options, importantly the Authorization token
  */
 
 export const useGmailTools = () => {
