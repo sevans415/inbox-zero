@@ -1,7 +1,11 @@
 import React from "react";
 import { useGoogleLogin } from "react-google-login";
 
-import { useGmailTools, GmailToolsContext } from "../../state/setupGmailTools";
+import {
+  useGmailTools,
+  GmailToolsContext,
+  getFromStorage
+} from "../../state/setupGmailTools";
 import Main from "../main/Main";
 import logo from "../../assets/logo.svg";
 import "./App.css";
@@ -10,6 +14,11 @@ const scope = "https://mail.google.com/";
 
 const Home = () => {
   const { tools, setupGmailTools } = useGmailTools();
+
+  const storedAuthDetails = getFromStorage();
+  if (storedAuthDetails && !tools) {
+    setupGmailTools(storedAuthDetails);
+  }
 
   const onFailure = res => {
     console.log(res);
