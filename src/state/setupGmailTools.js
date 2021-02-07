@@ -56,7 +56,8 @@ export const getFromStorage = () => {
   if (!authResponse) return;
 
   const res = JSON.parse(authResponse);
-  if (new Date(res.tokenObj.expiresAt) < new Date()) {
+  const expiresAt = new Date(res.tokenObj.expires_at);
+  if (expiresAt && expiresAt < new Date()) {
     window.localStorage.removeItem(AUTH_RESPONSE_DATA);
     return;
   }
